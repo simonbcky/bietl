@@ -1,0 +1,19 @@
+{
+	"name": "ingestAcelCSV",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AcelFoglaltsag",
+						"type": "DatasetReference"
+					},
+					"name": "acelData"
+				}
+			],
+			"sinks": [],
+			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> acelData"
+		}
+	}
+}
