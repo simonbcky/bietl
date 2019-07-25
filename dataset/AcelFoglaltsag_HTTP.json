@@ -1,6 +1,7 @@
 {
-	"name": "AcelFoglaltsag",
+	"name": "AcelFoglaltsag_HTTP",
 	"properties": {
+		"description": "ne hasznald, not supported",
 		"linkedServiceName": {
 			"referenceName": "BI ETL Landingzone",
 			"type": "LinkedServiceReference"

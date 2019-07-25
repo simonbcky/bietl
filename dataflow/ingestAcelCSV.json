@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "AcelFoglaltsag",
+						"referenceName": "AcelFoglaltsag_HTTP",
 						"type": "DatasetReference"
 					},
 					"name": "acelData"
