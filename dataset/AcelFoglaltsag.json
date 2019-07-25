@@ -1,0 +1,22 @@
+{
+	"name": "AcelFoglaltsag",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BI ETL Landingzone",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "acelalapanyagkeszlet_teszt.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
