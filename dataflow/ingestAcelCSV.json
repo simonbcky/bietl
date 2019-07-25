@@ -13,7 +13,7 @@
 				}
 			],
 			"sinks": [],
-			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> acelData"
+			"script": "\n\nsource(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100) ~> acelData"
 		}
 	}
 }
