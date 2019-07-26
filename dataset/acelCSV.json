@@ -17,7 +17,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@dataset().FileName",
+					"value": "@dataset().fileName",
 					"type": "Expression"
 				},
 				"container": "ingestionlanding"
@@ -27,6 +27,195 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "Profil",
+				"type": "String"
+			},
+			{
+				"name": "Anyagm.",
+				"type": "String"
+			},
+			{
+				"name": "Hossz mm",
+				"type": "String"
+			},
+			{
+				"name": "Szélesség valós",
+				"type": "String"
+			},
+			{
+				"name": "Raktár",
+				"type": "String"
+			},
+			{
+				"name": "Tárhely",
+				"type": "String"
+			},
+			{
+				"name": "Tárhely név",
+				"type": "String"
+			},
+			{
+				"name": "Hármaskód",
+				"type": "String"
+			},
+			{
+				"name": "JOB szám",
+				"type": "String"
+			},
+			{
+				"name": "Foglalás leírása",
+				"type": "String"
+			},
+			{
+				"name": "Tételkód",
+				"type": "String"
+			},
+			{
+				"name": "Profil típus",
+				"type": "String"
+			},
+			{
+				"name": "Bevét dátum",
+				"type": "String"
+			},
+			{
+				"name": "Vonalkód",
+				"type": "String"
+			},
+			{
+				"name": "Foglalás dátuma",
+				"type": "String"
+			},
+			{
+				"name": "Megnevezés",
+				"type": "String"
+			},
+			{
+				"name": "Mértékegység",
+				"type": "String"
+			},
+			{
+				"name": "Fizikai készlet",
+				"type": "String"
+			},
+			{
+				"name": "Szállítólevél",
+				"type": "String"
+			},
+			{
+				"name": "Szélesség M",
+				"type": "String"
+			},
+			{
+				"name": "Mûbizonylatszám",
+				"type": "String"
+			},
+			{
+				"name": "Mûbizonylat típus",
+				"type": "String"
+			},
+			{
+				"name": "Alak",
+				"type": "String"
+			},
+			{
+				"name": "Megjegyzés",
+				"type": "String"
+			},
+			{
+				"name": "Min Megjegyzés",
+				"type": "String"
+			},
+			{
+				"name": "Minõségi eltérés",
+				"type": "String"
+			},
+			{
+				"name": "Minõségi eltérés leírás",
+				"type": "String"
+			},
+			{
+				"name": "Mûbizonylat dátuma",
+				"type": "String"
+			},
+			{
+				"name": "Kontrakció jk szám",
+				"type": "String"
+			},
+			{
+				"name": "Kontrakció szám",
+				"type": "String"
+			},
+			{
+				"name": "Ultrahang jk szám",
+				"type": "String"
+			},
+			{
+				"name": "Ultrahang osztály",
+				"type": "String"
+			},
+			{
+				"name": "Elméleti súly",
+				"type": "String"
+			},
+			{
+				"name": "Valós súly",
+				"type": "String"
+			},
+			{
+				"name": "SEP",
+				"type": "String"
+			},
+			{
+				"name": "EAR-HUF",
+				"type": "String"
+			},
+			{
+				"name": "ÁR MÉ",
+				"type": "String"
+			},
+			{
+				"name": "Készlet érték ELSZ HUF",
+				"type": "String"
+			},
+			{
+				"name": "HUFperKG",
+				"type": "String"
+			},
+			{
+				"name": "BEV-Raktar",
+				"type": "String"
+			},
+			{
+				"name": "Dátum létrehozása",
+				"type": "String"
+			},
+			{
+				"name": "BEV-Projekt",
+				"type": "String"
+			},
+			{
+				"name": "Szélesség profil",
+				"type": "String"
+			},
+			{
+				"name": "Szállító - Eredeti rendsz",
+				"type": "String"
+			},
+			{
+				"name": "Si tartalom",
+				"type": "String"
+			},
+			{
+				"name": "Ráhegesztéses javítóvizsgálat",
+				"type": "String"
+			},
+			{
+				"name": "Adagszám",
+				"type": "String"
+			}
+		]
 	}
 }
