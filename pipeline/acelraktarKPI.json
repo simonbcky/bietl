@@ -19,10 +19,6 @@
 						"referenceName": "ingestAcelCSV",
 						"type": "DataFlowReference",
 						"parameters": {
-							"folderPath": {
-								"value": "'@{pipeline().parameters.SourceFile}'",
-								"type": "Expression"
-							},
 							"fileName": {
 								"value": "'@{pipeline().parameters.SourceFile}'",
 								"type": "Expression"
