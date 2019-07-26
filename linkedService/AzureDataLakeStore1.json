@@ -1,0 +1,16 @@
+{
+	"name": "AzureDataLakeStore1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDataLakeStore",
+		"typeProperties": {
+			"dataLakeStoreUri": "https://biportal.azuredatalakestore.net/webhdfs/v1",
+			"servicePrincipalId": "1ae819a6-d797-42da-96b3-a7978e28f38d",
+			"tenant": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380",
+			"subscriptionId": "28324f94-e723-405f-8f54-cfdaa31f6568",
+			"resourceGroupName": "bi_portal",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkJJTE9BREVSXzY3ZGFiMjZkLTIyYTgtNGZlMS1hNDE2LTUzNzIxY2FjNWU0NiINCn0="
+		}
+	}
+}
