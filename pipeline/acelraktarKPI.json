@@ -24,8 +24,7 @@
 		],
 		"parameters": {
 			"SourceFile": {
-				"type": "string",
-				"defaultValue": "@pipeline().parameters.SourceFile"
+				"type": "string"
 			}
 		},
 		"folder": {
