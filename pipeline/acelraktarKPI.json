@@ -17,13 +17,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "ingestAcelCSV",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"acelData": {
-								"folderPath": "@triggerBody().folderPath",
-								"fileName": "@triggerBody().fileName"
-							}
-						}
+						"type": "DataFlowReference"
 					}
 				}
 			}

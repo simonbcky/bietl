@@ -6,13 +6,9 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"folderPath": {
+			"FileName": {
 				"type": "string",
-				"defaultValue": "@triggerBody().folderPath"
-			},
-			"fileName": {
-				"type": "string",
-				"defaultValue": "@triggerBody().fileName"
+				"defaultValue": "@pipeline().parameters.SourceFile"
 			}
 		},
 		"annotations": [],
