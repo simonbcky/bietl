@@ -17,7 +17,22 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "ingestAcelCSV",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"parameters": {
+							"folderPath": {
+								"value": "'@{pipeline().parameters.SourceFile}'",
+								"type": "Expression"
+							},
+							"fileName": {
+								"value": "'@{pipeline().parameters.SourceFile}'",
+								"type": "Expression"
+							}
+						},
+						"datasetParameters": {
+							"acelData": {
+								"FileName": "@pipeline().parameters.SourceFile"
+							}
+						}
 					}
 				}
 			}
