@@ -26,7 +26,7 @@
 						},
 						"datasetParameters": {
 							"acelData": {
-								"FileName": "@pipeline().parameters.SourceFile"
+								"fileName": "@pipeline().parameters.SourceFile"
 							}
 						}
 					}
