@@ -8,6 +8,9 @@
 				"pipelineReference": {
 					"referenceName": "acelraktarKPI",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"sourceFile": "@triggerBody().fileName"
 				}
 			}
 		],
