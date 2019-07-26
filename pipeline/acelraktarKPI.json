@@ -34,7 +34,7 @@
 			}
 		],
 		"parameters": {
-			"SourceFile": {
+			"sourceFile": {
 				"type": "string"
 			}
 		},
