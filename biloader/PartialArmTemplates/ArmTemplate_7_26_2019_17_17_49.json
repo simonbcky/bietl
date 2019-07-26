@@ -1,0 +1,37 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "biloader"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeStore",
+				"typeProperties": {
+					"dataLakeStoreUri": "https://biportal.azuredatalakestore.net/webhdfs/v1",
+					"servicePrincipalId": "1ae819a6-d797-42da-96b3-a7978e28f38d",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"tenant": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380",
+					"subscriptionId": "28324f94-e723-405f-8f54-cfdaa31f6568",
+					"resourceGroupName": "bi_portal"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
