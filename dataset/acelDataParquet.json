@@ -1,0 +1,29 @@
+{
+	"name": "acelDataParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStore1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"fileName": {
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.SourceFile"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureDataLakeStoreLocation",
+				"fileName": {
+					"value": "@dataset().fileName",
+					"type": "Expression"
+				},
+				"folderPath": "acelraktar"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
