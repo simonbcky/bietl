@@ -1,0 +1,32 @@
+{
+	"name": "acelCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ingestionBLOB",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"folderPath": {
+				"type": "string",
+				"defaultValue": "@triggerBody().folderPath"
+			},
+			"fileName": {
+				"type": "string",
+				"defaultValue": "@triggerBody().fileName"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "ingestionlanding"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
