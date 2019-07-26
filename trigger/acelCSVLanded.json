@@ -13,7 +13,7 @@
 		],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
-			"blobPathBeginsWith": "/ingestionlanding/blobs/acelraktar",
+			"blobPathBeginsWith": "/ingestionlanding/blobs/acelraktar/",
 			"scope": "/subscriptions/28324f94-e723-405f-8f54-cfdaa31f6568/resourceGroups/bi_portal/providers/Microsoft.Storage/storageAccounts/bietl",
 			"events": [
 				"Microsoft.Storage.BlobCreated"
