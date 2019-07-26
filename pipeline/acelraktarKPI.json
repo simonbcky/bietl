@@ -22,6 +22,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"SourceFile": {
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.SourceFile"
+			}
+		},
 		"folder": {
 			"name": "acel"
 		},
