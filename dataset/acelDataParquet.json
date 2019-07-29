@@ -16,10 +16,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureDataLakeStoreLocation",
-				"fileName": {
-					"value": "@dataset().fileName",
-					"type": "Expression"
-				},
 				"folderPath": "acelraktar"
 			},
 			"compressionCodec": "snappy"
