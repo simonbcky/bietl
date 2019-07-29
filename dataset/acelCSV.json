@@ -20,6 +20,7 @@
 					"value": "@dataset().fileName",
 					"type": "Expression"
 				},
+				"folderPath": "acelraktar",
 				"container": "ingestionlanding"
 			},
 			"columnDelimiter": ",",
