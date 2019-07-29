@@ -34,6 +34,43 @@
 						}
 					}
 				}
+			},
+			{
+				"name": "foglaltsagKPI",
+				"type": "DataLakeAnalyticsU-SQL",
+				"dependsOn": [
+					{
+						"activity": "ingestAcelCSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"scriptPath": "",
+					"scriptLinkedService": {
+						"referenceName": "AzureDataLakeStore1",
+						"type": "LinkedServiceReference"
+					},
+					"parameters": {
+						"fileName": {
+							"value": "@activity('ingestAcelCSV').output",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeAnalytics",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
