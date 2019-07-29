@@ -1,0 +1,168 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "biloader"
+		},
+		"AzureDataLakeStore1_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore1'"
+		},
+		"BI ETL Landingzone_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'BI ETL Landingzone'"
+		},
+		"ingestionBLOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ingestionBLOB'"
+		},
+		"AzureDataLakeAnalytics_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics'"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+			"type": "string",
+			"defaultValue": "https://biportal.azuredatalakestore.net/webhdfs/v1"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "1ae819a6-d797-42da-96b3-a7978e28f38d"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "28324f94-e723-405f-8f54-cfdaa31f6568"
+		},
+		"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "bi_portal"
+		},
+		"BI ETL Landingzone_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://kesz.sharepoint.com/sites/BIportal2/ETL_landingzone"
+		},
+		"BI ETL Landingzone_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "bicskey.simon@kesz.hu"
+		},
+		"acelCSVLanded_properties_acelraktarKPI_parameters_SourceFile": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"acelCSVLanded_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/28324f94-e723-405f-8f54-cfdaa31f6568/resourceGroups/bi_portal/providers/Microsoft.Storage/storageAccounts/bietl"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "bietlanalytics"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "1ae819a6-d797-42da-96b3-a7978e28f38d"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "28324f94-e723-405f-8f54-cfdaa31f6568"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "bi_portal"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas Token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStore1_servicePrincipalKey": {
+						"value": "[parameters('AzureDataLakeStore1_servicePrincipalKey')]"
+					},
+					"BI ETL Landingzone_password": {
+						"value": "[parameters('BI ETL Landingzone_password')]"
+					},
+					"ingestionBLOB_connectionString": {
+						"value": "[parameters('ingestionBLOB_connectionString')]"
+					},
+					"AzureDataLakeAnalytics_servicePrincipalKey": {
+						"value": "[parameters('AzureDataLakeAnalytics_servicePrincipalKey')]"
+					},
+					"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
+						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri')]"
+					},
+					"AzureDataLakeStore1_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureDataLakeStore1_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_tenant')]"
+					},
+					"AzureDataLakeStore1_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_subscriptionId')]"
+					},
+					"AzureDataLakeStore1_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_resourceGroupName')]"
+					},
+					"BI ETL Landingzone_properties_typeProperties_url": {
+						"value": "[parameters('BI ETL Landingzone_properties_typeProperties_url')]"
+					},
+					"BI ETL Landingzone_properties_typeProperties_userName": {
+						"value": "[parameters('BI ETL Landingzone_properties_typeProperties_userName')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_accountName')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_tenant')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_subscriptionId')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName')]"
+					},
+					"acelCSVLanded_properties_acelraktarKPI_parameters_SourceFile": {
+						"value": "[parameters('acelCSVLanded_properties_acelraktarKPI_parameters_SourceFile')]"
+					},
+					"acelCSVLanded_properties_typeProperties_scope": {
+						"value": "[parameters('acelCSVLanded_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

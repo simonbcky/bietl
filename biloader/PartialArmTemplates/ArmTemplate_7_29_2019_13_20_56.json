@@ -1,0 +1,446 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "biloader"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/acelraktarKPI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ingestAcelCSV",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "ingestAcelCSV",
+								"type": "DataFlowReference",
+								"parameters": {
+									"fileName": {
+										"value": "'@{pipeline().parameters.SourceFile}'",
+										"type": "Expression"
+									}
+								},
+								"datasetParameters": {
+									"acelData": {
+										"fileName": "@pipeline().parameters.SourceFile"
+									},
+									"datalake": {
+										"fileName": "@pipeline().parameters.SourceFile"
+									}
+								}
+							}
+						}
+					},
+					{
+						"name": "select",
+						"type": "DataLakeAnalyticsU-SQL",
+						"dependsOn": [
+							{
+								"activity": "ingestAcelCSV",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"scriptPath": "",
+							"scriptLinkedService": {
+								"referenceName": "AzureDataLakeStore1",
+								"type": "LinkedServiceReference"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDataLakeAnalytics",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"parameters": {
+					"SourceFile": {
+						"type": "string"
+					}
+				},
+				"folder": {
+					"name": "acel"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/ingestAcelCSV')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AcelFoglaltsag_HTTP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "ne hasznald, not supported",
+				"linkedServiceName": {
+					"referenceName": "BI ETL Landingzone",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": "acelalapanyagkeszlet_teszt.csv"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/acelCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ingestionBLOB",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"fileName": {
+						"type": "string",
+						"defaultValue": "@pipeline().parameters.SourceFile"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "@dataset().fileName",
+							"type": "Expression"
+						},
+						"container": "ingestionlanding"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "Profil",
+						"type": "String"
+					},
+					{
+						"name": "Anyagm.",
+						"type": "String"
+					},
+					{
+						"name": "Hossz mm",
+						"type": "String"
+					},
+					{
+						"name": "Szélesség valós",
+						"type": "String"
+					},
+					{
+						"name": "Raktár",
+						"type": "String"
+					},
+					{
+						"name": "Tárhely",
+						"type": "String"
+					},
+					{
+						"name": "Tárhely név",
+						"type": "String"
+					},
+					{
+						"name": "Hármaskód",
+						"type": "String"
+					},
+					{
+						"name": "JOB szám",
+						"type": "String"
+					},
+					{
+						"name": "Foglalás leírása",
+						"type": "String"
+					},
+					{
+						"name": "Tételkód",
+						"type": "String"
+					},
+					{
+						"name": "Profil típus",
+						"type": "String"
+					},
+					{
+						"name": "Bevét dátum",
+						"type": "String"
+					},
+					{
+						"name": "Vonalkód",
+						"type": "String"
+					},
+					{
+						"name": "Foglalás dátuma",
+						"type": "String"
+					},
+					{
+						"name": "Megnevezés",
+						"type": "String"
+					},
+					{
+						"name": "Mértékegység",
+						"type": "String"
+					},
+					{
+						"name": "Fizikai készlet",
+						"type": "String"
+					},
+					{
+						"name": "Szállítólevél",
+						"type": "String"
+					},
+					{
+						"name": "Szélesség M",
+						"type": "String"
+					},
+					{
+						"name": "Mûbizonylatszám",
+						"type": "String"
+					},
+					{
+						"name": "Mûbizonylat típus",
+						"type": "String"
+					},
+					{
+						"name": "Alak",
+						"type": "String"
+					},
+					{
+						"name": "Megjegyzés",
+						"type": "String"
+					},
+					{
+						"name": "Min Megjegyzés",
+						"type": "String"
+					},
+					{
+						"name": "Minõségi eltérés",
+						"type": "String"
+					},
+					{
+						"name": "Minõségi eltérés leírás",
+						"type": "String"
+					},
+					{
+						"name": "Mûbizonylat dátuma",
+						"type": "String"
+					},
+					{
+						"name": "Kontrakció jk szám",
+						"type": "String"
+					},
+					{
+						"name": "Kontrakció szám",
+						"type": "String"
+					},
+					{
+						"name": "Ultrahang jk szám",
+						"type": "String"
+					},
+					{
+						"name": "Ultrahang osztály",
+						"type": "String"
+					},
+					{
+						"name": "Elméleti súly",
+						"type": "String"
+					},
+					{
+						"name": "Valós súly",
+						"type": "String"
+					},
+					{
+						"name": "SEP",
+						"type": "String"
+					},
+					{
+						"name": "EAR-HUF",
+						"type": "String"
+					},
+					{
+						"name": "ÁR MÉ",
+						"type": "String"
+					},
+					{
+						"name": "Készlet érték ELSZ HUF",
+						"type": "String"
+					},
+					{
+						"name": "HUFperKG",
+						"type": "String"
+					},
+					{
+						"name": "BEV-Raktar",
+						"type": "String"
+					},
+					{
+						"name": "Dátum létrehozása",
+						"type": "String"
+					},
+					{
+						"name": "BEV-Projekt",
+						"type": "String"
+					},
+					{
+						"name": "Szélesség profil",
+						"type": "String"
+					},
+					{
+						"name": "Szállító - Eredeti rendsz",
+						"type": "String"
+					},
+					{
+						"name": "Si tartalom",
+						"type": "String"
+					},
+					{
+						"name": "Ráhegesztéses javítóvizsgálat",
+						"type": "String"
+					},
+					{
+						"name": "Adagszám",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/acelDataParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStore1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"fileName": {
+						"type": "string",
+						"defaultValue": "@pipeline().parameters.SourceFile"
+					}
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureDataLakeStoreLocation",
+						"folderPath": "acelraktar"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/acelCSVLanded')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "acelraktarKPI",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"SourceFile": "@triggerBody().fileName"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/ingestionlanding/blobs/acelraktar/",
+					"scope": "/subscriptions/28324f94-e723-405f-8f54-cfdaa31f6568/resourceGroups/bi_portal/providers/Microsoft.Storage/storageAccounts/bietl",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/acelraktarKPI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ingestAcelCSV')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"folder": {
+					"name": "acel"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "acelCSV",
+								"type": "DatasetReference"
+							},
+							"name": "acelData"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "acelDataParquet",
+								"type": "DatasetReference"
+							},
+							"name": "datalake"
+						}
+					],
+					"script": "\nparameters{\n\tfileName as string\n}\nsource(output(\n\t\tProfil as string,\n\t\t{Anyagm.} as string,\n\t\t{Hossz mm} as integer,\n\t\t{Szélesség valós} as integer,\n\t\t{Raktár} as string,\n\t\t{Tárhely} as string,\n\t\t{Tárhely név} as string,\n\t\t{Hármaskód} as string,\n\t\t{JOB szám} as string,\n\t\t{Foglalás leírása} as string,\n\t\t{Tételkód} as string,\n\t\t{Profil típus} as string,\n\t\t{Bevét dátum} as date,\n\t\t{Vonalkód} as integer,\n\t\t{Foglalás dátuma} as date,\n\t\t{Megnevezés} as string,\n\t\t{Mértékegység} as string,\n\t\t{Fizikai készlet} as short,\n\t\t{Szállítólevél} as string,\n\t\t{Szélesség M} as integer,\n\t\t{Mûbizonylatszám} as string,\n\t\t{Mûbizonylat típus} as string,\n\t\tAlak as string,\n\t\t{Megjegyzés} as string,\n\t\t{Min Megjegyzés} as string,\n\t\t{Minõségi eltérés} as string,\n\t\t{Minõségi eltérés leírás} as string,\n\t\t{Mûbizonylat dátuma} as date,\n\t\t{Kontrakció jk szám} as string,\n\t\t{Kontrakció szám} as string,\n\t\t{Ultrahang jk szám} as string,\n\t\t{Ultrahang osztály} as string,\n\t\t{Elméleti súly} as short,\n\t\t{Valós súly} as double,\n\t\tSEP as string,\n\t\t{EAR-HUF} as short,\n\t\t{ÁR MÉ} as string,\n\t\t{Készlet érték ELSZ HUF} as double,\n\t\tHUFperKG as double,\n\t\t{BEV-Raktar} as string,\n\t\t{Dátum létrehozása} as string,\n\t\t{BEV-Projekt} as string,\n\t\t{Szélesség profil} as integer,\n\t\t{Szállító - Eredeti rendsz} as string,\n\t\t{Si tartalom} as short,\n\t\t{Ráhegesztéses javítóvizsgálat} as string,\n\t\t{Adagszám} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tpurgeFiles: true) ~> acelData\nacelData filter(notEquals({Foglalás leírása}, '')) ~> foglalasok\nfoglalasok select(mapColumn(\n\t\tharmaskod = {Hármaskód},\n\t\tfoglalas = {Foglalás leírása},\n\t\tjob = {JOB szám},\n\t\ttetelkod = {Tételkód}\n\t)) ~> strip\nstrip sink(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> datalake"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/acelCSV')]",
+				"[concat(variables('factoryId'), '/datasets/acelDataParquet')]"
+			]
+		}
+	]
+}
