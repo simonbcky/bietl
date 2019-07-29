@@ -20,6 +20,23 @@
 			},
 			"compressionCodec": "snappy"
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "harmaskod",
+				"type": "UTF8"
+			},
+			{
+				"name": "foglalas",
+				"type": "UTF8"
+			},
+			{
+				"name": "job",
+				"type": "UTF8"
+			},
+			{
+				"name": "tetelkod",
+				"type": "UTF8"
+			}
+		]
 	}
 }
