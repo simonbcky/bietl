@@ -37,6 +37,7 @@
 			},
 			{
 				"name": "foglaltsagKPI",
+				"description": "meg nem jo",
 				"type": "DataLakeAnalyticsU-SQL",
 				"dependsOn": [
 					{
