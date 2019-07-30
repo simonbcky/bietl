@@ -56,7 +56,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"scriptPath": "foglaltsagkpi/Unnamed",
+					"scriptPath": "/ETLscripts/foglaltsagKPI",
 					"scriptLinkedService": {
 						"referenceName": "AzureDataLakeStore1",
 						"type": "LinkedServiceReference"
