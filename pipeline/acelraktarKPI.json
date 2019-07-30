@@ -62,7 +62,7 @@
 					},
 					"parameters": {
 						"fileName": {
-							"value": "@activity('ingestAcelCSV').output",
+							"value": "@pipeline().parameters.SourceFile",
 							"type": "Expression"
 						}
 					}
