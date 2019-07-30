@@ -65,6 +65,10 @@
 						"infile": {
 							"value": "@concat( 'acelraktar/', pipeline().parameters.SourceFile)",
 							"type": "Expression"
+						},
+						"outfile": {
+							"value": "@concat('output/', pipeline().parameters.SourceFile)",
+							"type": "Expression"
 						}
 					}
 				},
