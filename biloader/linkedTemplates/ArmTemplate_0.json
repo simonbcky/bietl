@@ -7,6 +7,10 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "biloader"
 		},
+		"AzureDataLakeAnalytics_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics'"
+		},
 		"AzureDataLakeStore1_servicePrincipalKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore1'"
@@ -19,9 +23,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ingestionBLOB'"
 		},
-		"AzureDataLakeAnalytics_servicePrincipalKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics'"
+		"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "bietlanalytics"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "1ae819a6-d797-42da-96b3-a7978e28f38d"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "28324f94-e723-405f-8f54-cfdaa31f6568"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "bi_portal"
 		},
 		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
 			"type": "string",
@@ -50,26 +70,6 @@
 		"BI ETL Landingzone_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "bicskey.simon@kesz.hu"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
-			"type": "string",
-			"defaultValue": "bietlanalytics"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "1ae819a6-d797-42da-96b3-a7978e28f38d"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "28324f94-e723-405f-8f54-cfdaa31f6568"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "bi_portal"
 		},
 		"acelCSVLanded_properties_acelraktarKPI_parameters_SourceFile": {
 			"type": "string",
@@ -102,6 +102,33 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeAnalytics')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDataLakeAnalytics",
+				"typeProperties": {
+					"accountName": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_accountName')]",
+					"servicePrincipalId": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeAnalytics_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_tenant')]",
+					"subscriptionId": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_subscriptionId')]",
+					"resourceGroupName": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntime1",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStore1')]",
@@ -166,33 +193,6 @@
 				"type": "AzureBlobStorage",
 				"typeProperties": {
 					"connectionString": "[parameters('ingestionBLOB_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeAnalytics')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDataLakeAnalytics",
-				"typeProperties": {
-					"accountName": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_accountName')]",
-					"servicePrincipalId": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeAnalytics_servicePrincipalKey')]"
-					},
-					"tenant": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_tenant')]",
-					"subscriptionId": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_subscriptionId')]",
-					"resourceGroupName": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName')]"
 				},
 				"connectVia": {
 					"referenceName": "integrationRuntime1",
@@ -534,7 +534,7 @@
 							"name": "datalake"
 						}
 					],
-					"script": "\nparameters{\n\tfileName as string\n}\nsource(output(\n\t\tProfil as string,\n\t\t{Anyagm.} as string,\n\t\t{Hossz mm} as integer,\n\t\t{Szélesség valós} as integer,\n\t\t{Raktár} as string,\n\t\t{Tárhely} as string,\n\t\t{Tárhely név} as string,\n\t\t{Hármaskód} as string,\n\t\t{JOB szám} as string,\n\t\t{Foglalás leírása} as string,\n\t\t{Tételkód} as string,\n\t\t{Profil típus} as string,\n\t\t{Bevét dátum} as date,\n\t\t{Vonalkód} as integer,\n\t\t{Foglalás dátuma} as date,\n\t\t{Megnevezés} as string,\n\t\t{Mértékegység} as string,\n\t\t{Fizikai készlet} as short,\n\t\t{Szállítólevél} as string,\n\t\t{Szélesség M} as integer,\n\t\t{Mûbizonylatszám} as string,\n\t\t{Mûbizonylat típus} as string,\n\t\tAlak as string,\n\t\t{Megjegyzés} as string,\n\t\t{Min Megjegyzés} as string,\n\t\t{Minõségi eltérés} as string,\n\t\t{Minõségi eltérés leírás} as string,\n\t\t{Mûbizonylat dátuma} as date,\n\t\t{Kontrakció jk szám} as string,\n\t\t{Kontrakció szám} as string,\n\t\t{Ultrahang jk szám} as string,\n\t\t{Ultrahang osztály} as string,\n\t\t{Elméleti súly} as short,\n\t\t{Valós súly} as double,\n\t\tSEP as string,\n\t\t{EAR-HUF} as short,\n\t\t{ÁR MÉ} as string,\n\t\t{Készlet érték ELSZ HUF} as double,\n\t\tHUFperKG as double,\n\t\t{BEV-Raktar} as string,\n\t\t{Dátum létrehozása} as string,\n\t\t{BEV-Projekt} as string,\n\t\t{Szélesség profil} as integer,\n\t\t{Szállító - Eredeti rendsz} as string,\n\t\t{Si tartalom} as short,\n\t\t{Ráhegesztéses javítóvizsgálat} as string,\n\t\t{Adagszám} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tpurgeFiles: true) ~> acelData\nacelData filter(notEquals({Foglalás leírása}, '')) ~> foglalasok\nfoglalasok select(mapColumn(\n\t\tharmaskod = {Hármaskód},\n\t\tfoglalas = {Foglalás leírása},\n\t\tjob = {JOB szám},\n\t\ttetelkod = {Tételkód}\n\t)) ~> strip\nstrip sink(input(\n\t\tharmaskod as string,\n\t\tfoglalas as string,\n\t\tjob as string,\n\t\ttetelkod as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($fileName)],\n\tpartitionBy('hash', 1)) ~> datalake"
+					"script": "\nparameters{\n\tfileName as string\n}\nsource(output(\n\t\tProfil as string,\n\t\t{Anyagm.} as string,\n\t\t{Hossz mm} as integer,\n\t\t{Szélesség valós} as integer,\n\t\t{Raktár} as string,\n\t\t{Tárhely} as string,\n\t\t{Tárhely név} as string,\n\t\t{Hármaskód} as string,\n\t\t{JOB szám} as string,\n\t\t{Foglalás leírása} as string,\n\t\t{Tételkód} as string,\n\t\t{Profil típus} as string,\n\t\t{Bevét dátum} as date,\n\t\t{Vonalkód} as integer,\n\t\t{Foglalás dátuma} as date,\n\t\t{Megnevezés} as string,\n\t\t{Mértékegység} as string,\n\t\t{Fizikai készlet} as short,\n\t\t{Szállítólevél} as string,\n\t\t{Szélesség M} as integer,\n\t\t{Mûbizonylatszám} as string,\n\t\t{Mûbizonylat típus} as string,\n\t\tAlak as string,\n\t\t{Megjegyzés} as string,\n\t\t{Min Megjegyzés} as string,\n\t\t{Minõségi eltérés} as string,\n\t\t{Minõségi eltérés leírás} as string,\n\t\t{Mûbizonylat dátuma} as date,\n\t\t{Kontrakció jk szám} as string,\n\t\t{Kontrakció szám} as string,\n\t\t{Ultrahang jk szám} as string,\n\t\t{Ultrahang osztály} as string,\n\t\t{Elméleti súly} as short,\n\t\t{Valós súly} as double,\n\t\tSEP as string,\n\t\t{EAR-HUF} as short,\n\t\t{ÁR MÉ} as string,\n\t\t{Készlet érték ELSZ HUF} as double,\n\t\tHUFperKG as double,\n\t\t{BEV-Raktar} as string,\n\t\t{Dátum létrehozása} as string,\n\t\t{BEV-Projekt} as string,\n\t\t{Szélesség profil} as integer,\n\t\t{Szállító - Eredeti rendsz} as string,\n\t\t{Si tartalom} as short,\n\t\t{Ráhegesztéses javítóvizsgálat} as string,\n\t\t{Adagszám} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tpurgeFiles: true) ~> acelData\nacelData filter(notEquals({Foglalás leírása}, ''),\n\tpartitionBy('hash', 1)) ~> foglalasok\nfoglalasok select(mapColumn(\n\t\tharmaskod = {Hármaskód},\n\t\tfoglalas = {Foglalás leírása},\n\t\tjob = {JOB szám},\n\t\ttetelkod = {Tételkód}\n\t)) ~> strip\nstrip sink(input(\n\t\tharmaskod as string,\n\t\tfoglalas as string,\n\t\tjob as string,\n\t\ttetelkod as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:[($fileName)],\n\tpartitionBy('hash', 1)) ~> datalake"
 				}
 			},
 			"dependsOn": [
@@ -581,6 +581,44 @@
 							},
 							"staging": {}
 						}
+					},
+					{
+						"name": "foglaltsagKPI",
+						"description": "meg nem jo",
+						"type": "DataLakeAnalyticsU-SQL",
+						"dependsOn": [
+							{
+								"activity": "ingestAcelCSV",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"scriptPath": "/ETLscripts/foglaltsagKPI",
+							"scriptLinkedService": {
+								"referenceName": "AzureDataLakeStore1",
+								"type": "LinkedServiceReference"
+							},
+							"parameters": {
+								"fileName2": {
+									"value": "@pipeline().parameters.SourceFile",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDataLakeAnalytics",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"parameters": {
@@ -594,7 +632,9 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/ingestAcelCSV')]"
+				"[concat(variables('factoryId'), '/dataflows/ingestAcelCSV')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStore1')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeAnalytics')]"
 			]
 		},
 		{

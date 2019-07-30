@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "biloader"
 		},
+		"AzureDataLakeAnalytics_servicePrincipalKey": {
+			"value": ""
+		},
 		"AzureDataLakeStore1_servicePrincipalKey": {
 			"value": ""
 		},
@@ -14,8 +17,20 @@
 		"ingestionBLOB_connectionString": {
 			"value": ""
 		},
-		"AzureDataLakeAnalytics_servicePrincipalKey": {
-			"value": ""
+		"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
+			"value": "bietlanalytics"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
+			"value": "1ae819a6-d797-42da-96b3-a7978e28f38d"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
+			"value": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
+			"value": "28324f94-e723-405f-8f54-cfdaa31f6568"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
+			"value": "bi_portal"
 		},
 		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
 			"value": "https://biportal.azuredatalakestore.net/webhdfs/v1"
@@ -43,21 +58,6 @@
 		},
 		"acelCSVLanded_properties_typeProperties_scope": {
 			"value": "/subscriptions/28324f94-e723-405f-8f54-cfdaa31f6568/resourceGroups/bi_portal/providers/Microsoft.Storage/storageAccounts/bietl"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
-			"value": "bietlanalytics"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
-			"value": "1ae819a6-d797-42da-96b3-a7978e28f38d"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
-			"value": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
-			"value": "28324f94-e723-405f-8f54-cfdaa31f6568"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
-			"value": "bi_portal"
 		}
 	}
 }

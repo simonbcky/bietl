@@ -7,6 +7,10 @@
 			"metadata": "Data Factory Name",
 			"defaultValue": "biloader"
 		},
+		"AzureDataLakeAnalytics_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics'"
+		},
 		"AzureDataLakeStore1_servicePrincipalKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeStore1'"
@@ -19,9 +23,25 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ingestionBLOB'"
 		},
-		"AzureDataLakeAnalytics_servicePrincipalKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics'"
+		"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
+			"type": "string",
+			"defaultValue": "bietlanalytics"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "1ae819a6-d797-42da-96b3-a7978e28f38d"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
+			"type": "string",
+			"defaultValue": "28324f94-e723-405f-8f54-cfdaa31f6568"
+		},
+		"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
+			"type": "string",
+			"defaultValue": "bi_portal"
 		},
 		"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
 			"type": "string",
@@ -59,26 +79,6 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/28324f94-e723-405f-8f54-cfdaa31f6568/resourceGroups/bi_portal/providers/Microsoft.Storage/storageAccounts/bietl"
 		},
-		"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
-			"type": "string",
-			"defaultValue": "bietlanalytics"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "1ae819a6-d797-42da-96b3-a7978e28f38d"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "80c4d50f-2dbb-4fa4-a16b-7aaa49e1d380"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "28324f94-e723-405f-8f54-cfdaa31f6568"
-		},
-		"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "bi_portal"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -106,6 +106,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureDataLakeAnalytics_servicePrincipalKey": {
+						"value": "[parameters('AzureDataLakeAnalytics_servicePrincipalKey')]"
+					},
 					"AzureDataLakeStore1_servicePrincipalKey": {
 						"value": "[parameters('AzureDataLakeStore1_servicePrincipalKey')]"
 					},
@@ -115,8 +118,20 @@
 					"ingestionBLOB_connectionString": {
 						"value": "[parameters('ingestionBLOB_connectionString')]"
 					},
-					"AzureDataLakeAnalytics_servicePrincipalKey": {
-						"value": "[parameters('AzureDataLakeAnalytics_servicePrincipalKey')]"
+					"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_accountName')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_tenant')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_subscriptionId')]"
+					},
+					"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
+						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName')]"
 					},
 					"AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri": {
 						"value": "[parameters('AzureDataLakeStore1_properties_typeProperties_dataLakeStoreUri')]"
@@ -138,21 +153,6 @@
 					},
 					"BI ETL Landingzone_properties_typeProperties_userName": {
 						"value": "[parameters('BI ETL Landingzone_properties_typeProperties_userName')]"
-					},
-					"AzureDataLakeAnalytics_properties_typeProperties_accountName": {
-						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_accountName')]"
-					},
-					"AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId": {
-						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_servicePrincipalId')]"
-					},
-					"AzureDataLakeAnalytics_properties_typeProperties_tenant": {
-						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_tenant')]"
-					},
-					"AzureDataLakeAnalytics_properties_typeProperties_subscriptionId": {
-						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_subscriptionId')]"
-					},
-					"AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName": {
-						"value": "[parameters('AzureDataLakeAnalytics_properties_typeProperties_resourceGroupName')]"
 					},
 					"acelCSVLanded_properties_acelraktarKPI_parameters_SourceFile": {
 						"value": "[parameters('acelCSVLanded_properties_acelraktarKPI_parameters_SourceFile')]"
