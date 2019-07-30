@@ -61,7 +61,7 @@
 						"type": "LinkedServiceReference"
 					},
 					"parameters": {
-						"fileName": {
+						"fileName2": {
 							"value": "@pipeline().parameters.SourceFile",
 							"type": "Expression"
 						}
