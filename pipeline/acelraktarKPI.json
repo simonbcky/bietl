@@ -56,7 +56,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"scriptPath": "",
+					"scriptPath": "foglaltsagkpi/Unnamed",
 					"scriptLinkedService": {
 						"referenceName": "AzureDataLakeStore1",
 						"type": "LinkedServiceReference"
