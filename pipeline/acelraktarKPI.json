@@ -62,8 +62,8 @@
 						"type": "LinkedServiceReference"
 					},
 					"parameters": {
-						"fileName2": {
-							"value": "@pipeline().parameters.SourceFile",
+						"infile": {
+							"value": "@concat( 'acelraktar/', pipeline().parameters.SourceFile)",
 							"type": "Expression"
 						}
 					}

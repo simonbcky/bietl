@@ -11,6 +11,9 @@
 				"defaultValue": "@pipeline().parameters.SourceFile"
 			}
 		},
+		"folder": {
+			"name": "acel"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
