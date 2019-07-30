@@ -1,6 +1,7 @@
 {
 	"name": "acelraktarKPI",
 	"properties": {
+		"description": "meg nem jo, a usqlt be kene kotni.. lehet jobb helyette egybok a masik mert abban csak usql van",
 		"activities": [
 			{
 				"name": "ingestAcelCSV",
