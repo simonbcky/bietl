@@ -246,6 +246,9 @@
 						"defaultValue": "@pipeline().parameters.SourceFile"
 					}
 				},
+				"folder": {
+					"name": "acel"
+				},
 				"annotations": [],
 				"type": "DelimitedText",
 				"typeProperties": {
@@ -473,6 +476,9 @@
 						"defaultValue": "@pipeline().parameters.SourceFile"
 					}
 				},
+				"folder": {
+					"name": "acel"
+				},
 				"annotations": [],
 				"type": "Parquet",
 				"typeProperties": {
@@ -609,8 +615,12 @@
 								"type": "LinkedServiceReference"
 							},
 							"parameters": {
-								"fileName2": {
-									"value": "@pipeline().parameters.SourceFile",
+								"infile": {
+									"value": "@concat( 'acelraktar/', pipeline().parameters.SourceFile)",
+									"type": "Expression"
+								},
+								"outfile": {
+									"value": "@concat('output/', pipeline().parameters.SourceFile)",
 									"type": "Expression"
 								}
 							}
