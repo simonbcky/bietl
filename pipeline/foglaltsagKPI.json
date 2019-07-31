@@ -1,6 +1,11 @@
 {
 	"name": "foglaltsagKPI",
 	"properties": {
+		"parameters": {
+			"SourceFile": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "acel"
 		},
