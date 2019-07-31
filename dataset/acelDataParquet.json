@@ -11,9 +11,6 @@
 				"defaultValue": "@pipeline().parameters.SourceFile"
 			}
 		},
-		"folder": {
-			"name": "acel"
-		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {

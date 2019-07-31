@@ -1,6 +1,42 @@
 {
 	"name": "foglaltsagKPI",
 	"properties": {
+		"activities": [
+			{
+				"name": "excelKPIcalc",
+				"type": "Custom",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"resourceLinkedService": {
+						"referenceName": "ingestionBLOB",
+						"type": "LinkedServiceReference"
+					},
+					"folderPath": "etlscripts",
+					"extendedProperties": {
+						"filename": {
+							"value": "@pipeline().parameters.SourceFile",
+							"type": "Expression"
+						}
+					},
+					"referenceObjects": {
+						"linkedServices": [],
+						"datasets": []
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureBatch",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
 		"parameters": {
 			"SourceFile": {
 				"type": "string"

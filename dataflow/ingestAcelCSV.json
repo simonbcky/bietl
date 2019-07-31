@@ -1,9 +1,6 @@
 {
 	"name": "ingestAcelCSV",
 	"properties": {
-		"folder": {
-			"name": "acel"
-		},
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
