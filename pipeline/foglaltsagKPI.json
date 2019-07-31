@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "excelKPIcalc",
-				"type": "Custom",
+				"name": "excelbasedKPIcalc",
+				"type": "AzureFunctionActivity",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -13,28 +13,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [],
-				"typeProperties": {
-					"resourceLinkedService": {
-						"referenceName": "ingestionBLOB",
-						"type": "LinkedServiceReference"
-					},
-					"folderPath": "etlscripts",
-					"extendedProperties": {
-						"filename": {
-							"value": "@pipeline().parameters.SourceFile",
-							"type": "Expression"
-						}
-					},
-					"referenceObjects": {
-						"linkedServices": [],
-						"datasets": []
-					}
-				},
-				"linkedServiceName": {
-					"referenceName": "AzureBatch",
-					"type": "LinkedServiceReference"
-				}
+				"userProperties": []
 			}
 		],
 		"parameters": {
