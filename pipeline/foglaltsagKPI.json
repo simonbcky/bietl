@@ -1,0 +1,9 @@
+{
+	"name": "foglaltsagKPI",
+	"properties": {
+		"folder": {
+			"name": "acel"
+		},
+		"annotations": []
+	}
+}
