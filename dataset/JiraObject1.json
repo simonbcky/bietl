@@ -1,0 +1,8 @@
+{
+	"name": "JiraObject1",
+	"properties": {
+		"annotations": [],
+		"type": "JiraObject",
+		"schema": []
+	}
+}
